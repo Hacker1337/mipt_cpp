@@ -14,9 +14,7 @@ typedef long long int ll;
 
 
 int main(){
-    freopen("input.txt", "r", stdin);
-    freopen("answer.txt", "w", stdout);
-
+    
     ll n, m;
     ll winners = 3;    // сколько выживших отслеживать
     cout << "Введите количество людей и длину считалочки\n";
