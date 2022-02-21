@@ -1,0 +1,18 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+D:/Documents/CLion/mipt_cpp/laba1/simulater.h
+vector
+-
+iostream
+-
+
+D:/Documents/CLion/mipt_cpp/laba1/testLauncher.cpp
+simulater.h
+D:/Documents/CLion/mipt_cpp/laba1/simulater.h
+
