@@ -1,0 +1,3 @@
+all: main
+main : one_particle_launcher.cpp
+	g++ one_particle_launcher.cpp simulater.h simulater.cpp -o oneParticle/oneLauncher
