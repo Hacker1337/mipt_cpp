@@ -2,28 +2,32 @@ import os
 import numpy as np
 from matplotlib import pyplot as plt
 import subprocess
+from tqdm import tqdm
 
 import pandas as pd
 
-df = pd.DataFrame()
-# .run as run
-file = open("input.txt", 'w')
-print(100, 100, 50, 50, 1000, file=file)
-file.close()
 
-input = open("input.txt", 'r')
-output = open("output.txt", 'w')
-
-# subprocess.run("./oneLauncher << input.txt > templ.txt")
-# subprocess.run(["./oneLauncher"], input="10 10 5 5")
-# subprocess.run(["make", "-f ../onemake"])
 os.chdir("..")
-os.system("ls")
+os.system("make -f onemake")
 os.chdir("oneParticle")
-subprocess.run(["./oneLauncher"], stdin=input, stdout=output)
 
-data = np.loadtxt("output.txt")
-df['100']=data
+# df = pd.DataFrame()
+for hight_pow in tqdm(range(3, 8)):
+    hight = int(2**(hight_pow))
+
+    file = open("input.txt", 'w')
+    print(hight, hight, hight//2, hight//2, 500, file=file)
+    file.close()
+
+    input = open("input.txt", 'r')
+    output = open("output.txt", 'w')
+
+    subprocess.run(["./oneLauncher"], stdin=input, stdout=output)
+
+    data = np.loadtxt("output.txt")
+    df = pd.read_csv('rub_results.csv', index_col=0)
+    df[f'{hight}']=data
+    df.to_csv('rub_results.csv')
+
 print(df.head())
-# plt.hist(data, bins=50)
-# plt.show()
+
