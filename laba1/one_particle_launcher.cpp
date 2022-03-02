@@ -6,6 +6,8 @@ int main() {
     int width, hight, i0, j0, iterNumber;
     cin >> hight >> width;
     cin >> i0 >> j0 >> iterNumber;
+    j0 = 0;
+    width = 1;
 
     vector<vector<bool>> testField(hight, vector<bool>(width));
     

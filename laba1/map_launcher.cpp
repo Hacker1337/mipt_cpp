@@ -5,33 +5,29 @@
 
 int main() {
     freopen("input.txt", "r", stdin);
-    freopen("output5x5.txt", "w", stdout);
+    freopen("output50.txt", "w", stdout);
 
 
     int width, hight, iterNumber;
-    cin >> hight >> width;
-    cin >> iterNumber;
-    iterNumber = 300;
+    hight = 50;
+
+    width = 1;
+    iterNumber = 1000;
     
 
     vector<vector<bool>> Field(hight, vector<bool>(width));
     vector<pair<int, int>> order;
-    for (int i = 0; i < width; i++)
+    for (int i = 0; i < hight; i++)
     {
-        for (int j = 0; j < hight; j++)
+        for (int j = 0; j < width; j++)
         {
             order.push_back({i, j});
         }   
     }
     
-    // Field[i0][j0] = 1;
-    shuffle (order.begin(), order.end(), std::default_random_engine(42));
+    shuffle (order.begin(), order.end(), std::default_random_engine(time(0)));
 
     
-    // for (int i = 0; i < order.size(); i++)
-    // {
-    //     cout << order[i].first << " " << order[i].second << '\n';
-    // }
     int disloc_step = 1;
     int disloc_number = 0;
 

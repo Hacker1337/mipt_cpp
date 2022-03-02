@@ -11,12 +11,14 @@ os.chdir("..")
 os.system("make -f onemake")
 os.chdir("oneParticle")
 
-# df = pd.DataFrame()
-for hight_pow in tqdm(range(3, 8)):
+df = pd.DataFrame()
+df.to_csv("rub_results1d.csv")
+
+for hight_pow in tqdm(range(3, 13)):
     hight = int(2**(hight_pow))
 
     file = open("input.txt", 'w')
-    print(hight, hight, hight//2, hight//2, 500, file=file)
+    print(hight, hight, hight//2, hight//2, 200, file=file)
     file.close()
 
     input = open("input.txt", 'r')
@@ -25,9 +27,9 @@ for hight_pow in tqdm(range(3, 8)):
     subprocess.run(["./oneLauncher"], stdin=input, stdout=output)
 
     data = np.loadtxt("output.txt")
-    df = pd.read_csv('rub_results.csv', index_col=0)
+    df = pd.read_csv('rub_results1d.csv', index_col=0)
     df[f'{hight}']=data
-    df.to_csv('rub_results.csv')
+    df.to_csv('rub_results1d.csv')
 
 print(df.head())
 
