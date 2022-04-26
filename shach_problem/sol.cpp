@@ -12,13 +12,14 @@ using v = vector<T>;
 
 const int inf = 1e3;
 
+template<typename T>
 class DP {
     int dim;
     int size;
-    int* array;
+    T* array;
 public:
-    DP(int dim=4, int size=8, int values=inf): dim(dim), size(size) {
-        array = new int[(int)pow(size, dim)];
+    DP(T values, int dim=4, int size=8): dim(dim), size(size) {
+        array = new T[(int)pow(size, dim)];
         for (int i = 0; i < pow(size, dim); i++)
         {
             array[i] = values;
@@ -26,7 +27,7 @@ public:
         
     }
 
-    int get(int i, int j, int k, int l) {
+    T get(int i, int j, int k, int l) {
         if (i >= size || j >= size || k >= size || l >= size || 
         i < 0 || j < 0 || k < 0 || l < 0) {
             // throw std::out_of_range("Wrong indicies");
@@ -34,7 +35,7 @@ public:
         }
         return array[l + size*(k + size*(j + size*i))];
     }
-    int& set(int i, int j, int k, int l) {
+    T& set(int i, int j, int k, int l) {
         if (i >= size || j >= size || k >= size || l >= size || 
         i < 0 || j < 0 || k < 0 || l < 0) {
             throw std::out_of_range("Wrong indicies");
@@ -54,8 +55,9 @@ int main(){
     const int size = 8;
     // v<v<v<v<int>>>> dpwhite = v<v<v<v<int>>>>(size, v<v<v<int>>>(size, v<v<int>>(size, v<int>(size, inf))));
     // v<v<v<v<int>>>> dpblack = v<v<v<v<int>>>>(size, v<v<v<int>>>(size, v<v<int>>(size, v<int>(size, inf))));
-    DP dpwhite;
-    DP dpblack;
+    DP<int> dpwhite(inf);
+    DP<int> dpblack(inf);
+    DP<pair<int, int>> steps({-1, -1}); // куда должен походить ферзь из этой позиции
 
     // начальные значения
     
