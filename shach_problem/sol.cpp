@@ -73,77 +73,121 @@ int main(){
             }
             // бьется ферзем
             
-            int t1, t2;
-            t1 = l;
-            t2 = k;
-            while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
+            for (int t1(l), t2(k); 0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2); t1++) {
                 if (t1==l && t2==k)
                     continue;
                 dpblack.set(t1, t2, k, l) = 0;
-                t1++;
             }
-            t1 = l;
-            t2 = k;
-            while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
+            for (int t1(l), t2(k); 0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2); t1--) {
                 if (t1==l && t2==k)
                     continue;
                 dpblack.set(t1, t2, k, l) = 0;
-                t1--;
             }
-            t1 = l;
-            t2 = k;
-            while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
+            
+            for (int t1(l), t2(k); 0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2); t2++) {
                 if (t1==l && t2==k)
                     continue;
                 dpblack.set(t1, t2, k, l) = 0;
-                t2++;
             }
-            t1 = l;
-            t2 = k;
-            while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
+            for (int t1(l), t2(k); 0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2); t2--) {
                 if (t1==l && t2==k)
                     continue;
                 dpblack.set(t1, t2, k, l) = 0;
-                t2--;
             }
+            
+            for (int t1(l), t2(k); 0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2);t1++, t2++) {
+                if (t1==l && t2==k)
+                    continue;
+                dpblack.set(t1, t2, k, l) = 0;
+            }
+            for (int t1(l), t2(k); 0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2);t1--, t2--) {
+                if (t1==l && t2==k)
+                    continue;
+                dpblack.set(t1, t2, k, l) = 0;
+            }
+            
+            for (int t1(l), t2(k); 0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2);t1++, t2--) {
+                if (t1==l && t2==k)
+                    continue;
+                dpblack.set(t1, t2, k, l) = 0;
+            }
+            for (int t1(l), t2(k); 0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2);t1--, t2++) {
+                if (t1==l && t2==k)
+                    continue;
+                dpblack.set(t1, t2, k, l) = 0;
+            }
+            
+            
 
-            t1 = l;
-            t2 = k;
-            while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
-                if (t1==l && t2==k)
-                    continue;
-                dpblack.set(t1, t2, k, l) = 0;
-                t1--;
-                t2--;
-            }
-            t1 = l;
-            t2 = k;
-            while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
-                if (t1==l && t2==k)
-                    continue;
-                dpblack.set(t1, t2, k, l) = 0;
-                t1++;
-                t2++;
-            }
-
-            t1 = l;
-            t2 = k;
-            while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
-                if (t1==l && t2==k)
-                    continue;
-                dpblack.set(t1, t2, k, l) = 0;
-                t1--;
-                t2++;
-            }
-            t1 = l;
-            t2 = k;
-            while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
-                if (t1==l && t2==k)
-                    continue;
-                dpblack.set(t1, t2, k, l) = 0;
-                t1++;
-                t2--;
-            }
+            // int t1, t2;
+            // t1 = l;
+            // t2 = k;
+            // while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
+            //     if (t1==l && t2==k)
+            //         continue;
+            //     dpblack.set(t1, t2, k, l) = 0;
+            //     t1++;
+            // }
+            // t1 = l;
+            // t2 = k;
+            // while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
+            //     if (t1==l && t2==k)
+            //         continue;
+            //     dpblack.set(t1, t2, k, l) = 0;
+            //     t1--;
+            // }
+            // t1 = l;
+            // t2 = k;
+            // while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
+            //     if (t1==l && t2==k)
+            //         continue;
+            //     dpblack.set(t1, t2, k, l) = 0;
+            //     t2++;
+            // }
+            // t1 = l;
+            // t2 = k;
+            // while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
+            //     if (t1==l && t2==k)
+            //         continue;
+            //     dpblack.set(t1, t2, k, l) = 0;
+            //     t2--;
+            // }
+            // t1 = l;
+            // t2 = k;
+            // while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
+            //     if (t1==l && t2==k)
+            //         continue;
+            //     dpblack.set(t1, t2, k, l) = 0;
+            //     t1--;
+            //     t2--;
+            // }
+            // t1 = l;
+            // t2 = k;
+            // while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
+            //     if (t1==l && t2==k)
+            //         continue;
+            //     dpblack.set(t1, t2, k, l) = 0;
+            //     t1++;
+            //     t2++;
+            // }
+            // t1 = l;
+            // t2 = k;
+            // while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
+            //     if (t1==l && t2==k)
+            //         continue;
+            //     dpblack.set(t1, t2, k, l) = 0;
+            //     t1--;
+            //     t2++;
+            // }
+            // t1 = l;
+            // t2 = k;
+            // while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
+            //     if (t1==l && t2==k)
+            //         continue;
+            //     dpblack.set(t1, t2, k, l) = 0;
+            //     t1++;
+            //     t2--;
+            // }
         }
         
     }
@@ -170,6 +214,11 @@ int main(){
         {for (int l = 0; l < size; l++){
             if (dpwhite.get(i,j,k,l) != inf)
                 continue;
+            if (i == k && j == l)
+            {
+                continue;
+            }
+            
             dpwhite.set(i,j,k,l) = -1;
             for (int x1 = -1; x1 < 2; x1++)
             {
@@ -192,6 +241,8 @@ int main(){
             {
                 continue;
             }
+            if (i == k && k == l)
+                continue;
             
             int t1, t2;
             t1 = l;
@@ -274,12 +325,12 @@ int main(){
     }}}
 
 
-    int i = 7;
-    int j = 6;
+    int i = 4;
+    int j = 4;
     for (int k = 0; k < size; k++){
     for (int l = 0; l < size; l++){
-        // cout << dpblack.get(i, j, k, l) << "\t";
-        cout << dpwhite.get(i, j, k, l) << "\t";
+        cout << dpblack.get(i, j, k, l) << "\t";
+        // cout << dpwhite.get(i, j, k, l) << "\t";
     }
     cout << endl;
     }
