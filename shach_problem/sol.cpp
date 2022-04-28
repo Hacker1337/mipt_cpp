@@ -17,8 +17,10 @@ class DP {
     int dim;
     int size;
     T* array;
+    T default_value;
+    T border_value;
 public:
-    DP(T values, int dim=4, int size=8): dim(dim), size(size) {
+    DP(T values, T border_value, int dim=4, int size=8): border_value(border_value), dim(dim), size(size) {
         array = new T[(int)pow(size, dim)];
         for (int i = 0; i < pow(size, dim); i++)
         {
@@ -31,7 +33,7 @@ public:
         if (i >= size || j >= size || k >= size || l >= size || 
         i < 0 || j < 0 || k < 0 || l < 0) {
             // throw std::out_of_range("Wrong indicies");
-            return 0;
+            return border_value;
         }
         return array[l + size*(k + size*(j + size*i))];
     }
@@ -55,9 +57,9 @@ int main(){
     const int size = 8;
     // v<v<v<v<int>>>> dpwhite = v<v<v<v<int>>>>(size, v<v<v<int>>>(size, v<v<int>>(size, v<int>(size, inf))));
     // v<v<v<v<int>>>> dpblack = v<v<v<v<int>>>>(size, v<v<v<int>>>(size, v<v<int>>(size, v<int>(size, inf))));
-    DP<int> dpwhite(inf);
-    DP<int> dpblack(inf);
-    DP<pair<int, int>> steps({-1, -1}); // куда должен походить ферзь из этой позиции
+    DP<int> dpwhite(inf, 0);
+    DP<int> dpblack(inf, 0);
+    DP<pair<int, int>> steps({-1, -1}, {-1, -1}); // куда должен походить ферзь из этой позиции
 
     // начальные значения
     
@@ -239,10 +241,10 @@ int main(){
         {for (int j = 0; j < size; j++)
         {for (int k = 0; k < size; k++)
         {for (int l = 0; l < size; l++){
-            if (dpblack.get(i, j, k, l) != inf)
-            {
-                continue;
-            }
+            // if (dpblack.get(i, j, k, l) != inf)
+            // {
+            //     continue;
+            // }
             if (i == k && k == l)
                 continue;
             
@@ -250,39 +252,56 @@ int main(){
             t1 = l;
             t2 = k;
             while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
-                dpblack.set(i, j, k, l) = min(dpblack.get(i, j, k, l), 1 + dpwhite.get(i, j, t1, t2));
+                if (1 + dpwhite.get(i, j, t1, t2) < dpblack.get(i, j, k, l)) {
+                    dpblack.set(i, j, k, l) = 1 + dpwhite.get(i, j, t1, t2);    
+                    steps.set(i, j, k, l) = {t1, t2};
+                }
                 t1++;
             }
             t1 = l;
             t2 = k;
             while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
-                dpblack.set(i, j, k, l) = min(dpblack.get(i, j, k, l), 1 + dpwhite.get(i, j, t1, t2));
+                if (1 + dpwhite.get(i, j, t1, t2) < dpblack.get(i, j, k, l)) {
+                    dpblack.set(i, j, k, l) = 1 + dpwhite.get(i, j, t1, t2);    
+                    steps.set(i, j, k, l) = {t1, t2};
+                }
                 t2++;
             }
             t1 = l;
             t2 = k;
             while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
-                dpblack.set(i, j, k, l) = min(dpblack.get(i, j, k, l), 1 + dpwhite.get(i, j, t1, t2));
-                t1--;
+                if (1 + dpwhite.get(i, j, t1, t2) < dpblack.get(i, j, k, l)) {
+                    dpblack.set(i, j, k, l) = 1 + dpwhite.get(i, j, t1, t2);    
+                    steps.set(i, j, k, l) = {t1, t2};
+                }                t1--;
             }
             t1 = l;
             t2 = k;
             while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
-                dpblack.set(i, j, k, l) = min(dpblack.get(i, j, k, l), 1 + dpwhite.get(i, j, t1, t2));
+                if (1 + dpwhite.get(i, j, t1, t2) < dpblack.get(i, j, k, l)) {
+                    dpblack.set(i, j, k, l) = 1 + dpwhite.get(i, j, t1, t2);    
+                    steps.set(i, j, k, l) = {t1, t2};
+                }
                 t2--;
             }
 
             t1 = l;
             t2 = k;
             while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
-                dpblack.set(i, j, k, l) = min(dpblack.get(i, j, k, l), 1 + dpwhite.get(i, j, t1, t2));
+                if (1 + dpwhite.get(i, j, t1, t2) < dpblack.get(i, j, k, l)) {
+                    dpblack.set(i, j, k, l) = 1 + dpwhite.get(i, j, t1, t2);    
+                    steps.set(i, j, k, l) = {t1, t2};
+                }
                 t1--;
                 t2--;
             }
             t1 = l;
             t2 = k;
             while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
-                dpblack.set(i, j, k, l) = min(dpblack.get(i, j, k, l), 1 + dpwhite.get(i, j, t1, t2));
+                if (1 + dpwhite.get(i, j, t1, t2) < dpblack.get(i, j, k, l)) {
+                    dpblack.set(i, j, k, l) = 1 + dpwhite.get(i, j, t1, t2);    
+                    steps.set(i, j, k, l) = {t1, t2};
+                }
                 t1++;
                 t2++;
             }
@@ -290,14 +309,20 @@ int main(){
             t1 = l;
             t2 = k;
             while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
-                dpblack.set(i, j, k, l) = min(dpblack.get(i, j, k, l), 1 + dpwhite.get(i, j, t1, t2));
+                if (1 + dpwhite.get(i, j, t1, t2) < dpblack.get(i, j, k, l)) {
+                    dpblack.set(i, j, k, l) = 1 + dpwhite.get(i, j, t1, t2);    
+                    steps.set(i, j, k, l) = {t1, t2};
+                }
                 t1--;
                 t2++;
             }
             t1 = l;
             t2 = k;
             while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
-                dpblack.set(i, j, k, l) = min(dpblack.get(i, j, k, l), 1 + dpwhite.get(i, j, t1, t2));
+                if (1 + dpwhite.get(i, j, t1, t2) < dpblack.get(i, j, k, l)) {
+                    dpblack.set(i, j, k, l) = 1 + dpwhite.get(i, j, t1, t2);    
+                    steps.set(i, j, k, l) = {t1, t2};
+                }
                 t1++;
                 t2--;
             }
@@ -310,7 +335,6 @@ int main(){
     
 
     int max_steps = -2;
-    // int min_steps = inf;
 
     for (int i = 0; i < size; i++){
     for (int j = 0; j < size; j++){
@@ -318,8 +342,9 @@ int main(){
     for (int l = 0; l < size; l++){
         if (k == 2 && l == 2)
             continue;
+        if (i == k && j == l)
+            continue;
         max_steps = max(max_steps, dpblack.get(i, j, k, l));                
-        // min_steps = min(min_steps, dpblack.get(i, j, k, l));
         // cout << dpblack.get(i, j, k, l) << " ";
         // cout << dpwhite.get(i, j, k, l) << " ";
     }
@@ -327,34 +352,52 @@ int main(){
     }}}
 
 
-    int i = 4;
-    int j = 4;
-    for (int k = 0; k < size; k++){
-    for (int l = 0; l < size; l++){
-        cout << dpblack.get(i, j, k, l) << "\t";
-        // cout << dpwhite.get(i, j, k, l) << "\t";
-    }
-    cout << endl;
-    }
-
-    cout << endl;
-
-    // for (int i = 0; i < size+1; i++){
-    // for (int j = 0; j < size+1; j++){
-    //     int k = 6;
-    //     int l = 5;
-    //     cout << dpblack.get(i, j, k, l) << " ";
-    //     // cout << dpwhite.get(i, j, k, l) << " ";
+    // for (int k = 0; k < size; k++){
+    // for (int l = 0; l < size; l++){
+    //     int i = 7;
+    //     int j = 7;
+    //     cout << steps.get(i, j, k, l).first << " ";
+    //     cout << steps.get(i, j, k, l).second << "\t";
+    //        // вывод победного хода
     // }
     // cout << endl;
     // }
+    // cout << endl;
+
+
+    int i = 5;
+    int j = 6;
+    for (int k = 0; k < size; k++){
+    for (int l = 0; l < size; l++){
+        // cout << dpblack.get(i, j, k, l) << "\t";
+        cout << dpwhite.get(i, j, k, l) << "\t";
+    }
+    cout << endl;
+    }
+    cout << endl;
+
+
+    for (int i = 0; i < size; i++){
+    for (int j = 0; j < size; j++){
+        int k = 2;
+        int l = 0;
+        cout << dpblack.get(i, j, k, l) << " ";
+        // cout << dpwhite.get(i, j, k, l) << " ";
+    }
+    cout << endl;
+    }
 
     cout << "Mat is after maximum " << max_steps << " steps\n";
-    // cout << "Mat is after minimum " << min_steps << " steps\n";
+
+    cout << "Enter king position and fers position, to find out number of steps\n";
 
 
     int x1, y1, x2, y2;
     cin >> x1 >> y1 >> x2 >> y2;
-    cout << dpwhite.get(x1-1, y1-1, x2-1, y2-1);
-       
+    cout << endl;
+    cout << dpwhite.get(x1-1, y1-1, x2-1, y2-1) << endl;
+    
+    while (cin >> x1 >> y1 >> x2 >> y2) {
+        cout << steps.get(x1, y1, x2, y2).first << " " << steps.get(x1, y1, x2, y2).second;
+    }
 }
