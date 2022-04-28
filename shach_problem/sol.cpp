@@ -53,7 +53,7 @@ public:
 };
 
 int main(){
-    freopen("input.txt", "r", stdin);
+    // freopen("input.txt", "r", stdin);
 
     const int size = 8;
     // v<v<v<v<int>>>> dpwhite = v<v<v<v<int>>>>(size, v<v<v<int>>>(size, v<v<int>>(size, v<int>(size, inf))));
@@ -121,7 +121,6 @@ int main(){
         }
         
     }
-    cerr << dpblack.get(7, 5, 7, 5) << endl;
 
     for (int i = 0; i < size; i++)
     {
@@ -324,27 +323,27 @@ int main(){
     // cout << endl;
 
 
-    int i = 5;
-    int j = 6;
-    for (int k = 0; k < size; k++){
-    for (int l = 0; l < size; l++){
-        // cout << dpblack.get(i, j, k, l) << "\t";
-        cout << dpwhite.get(i, j, k, l) << "\t";
-    }
-    cout << endl;
-    }
-    cout << endl;
+    // int i = 5;
+    // int j = 6;
+    // for (int k = 0; k < size; k++){
+    // for (int l = 0; l < size; l++){
+    //     // cout << dpblack.get(i, j, k, l) << "\t";
+    //     cout << dpwhite.get(i, j, k, l) << "\t";
+    // }
+    // cout << endl;
+    // }
+    // cout << endl;
 
 
-    for (int i = 0; i < size; i++){
-    for (int j = 0; j < size; j++){
-        int k = 2;
-        int l = 0;
-        cout << dpblack.get(i, j, k, l) << " ";
-        // cout << dpwhite.get(i, j, k, l) << " ";
-    }
-    cout << endl;
-    }
+    // for (int i = 0; i < size; i++){
+    // for (int j = 0; j < size; j++){
+    //     int k = 2;
+    //     int l = 0;
+    //     cout << dpblack.get(i, j, k, l) << " ";
+    //     // cout << dpwhite.get(i, j, k, l) << " ";
+    // }
+    // cout << endl;
+    // }
 
     cout << "Mat is after maximum " << max_steps << " steps\n";
 
@@ -356,7 +355,7 @@ int main(){
     cout << endl;
     cout << dpwhite.get(x1-1, y1-1, x2-1, y2-1) << endl;
     
-    while (cin >> x1 >> y1 >> x2 >> y2) {
-        cout << steps.get(x1, y1, x2, y2).first << " " << steps.get(x1, y1, x2, y2).second;
-    }
+    // while (cin >> x1 >> y1 >> x2 >> y2) {
+    //     cout << steps.get(x1, y1, x2, y2).first << " " << steps.get(x1, y1, x2, y2).second;
+    // }
 }
