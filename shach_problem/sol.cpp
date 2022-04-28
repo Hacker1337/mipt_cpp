@@ -3,6 +3,7 @@
 #include <vector>
 #include <cmath>
 #include <stdexcept>
+#include <assert.h>
 
 
 using namespace std;
@@ -57,8 +58,8 @@ int main(){
     const int size = 8;
     // v<v<v<v<int>>>> dpwhite = v<v<v<v<int>>>>(size, v<v<v<int>>>(size, v<v<int>>(size, v<int>(size, inf))));
     // v<v<v<v<int>>>> dpblack = v<v<v<v<int>>>>(size, v<v<v<int>>>(size, v<v<int>>(size, v<int>(size, inf))));
-    DP<int> dpwhite(inf, 0);
-    DP<int> dpblack(inf, 0);
+    DP<int> dpwhite(inf, -1);
+    DP<int> dpblack(inf, -1);
     DP<pair<int, int>> steps({-1, -1}, {-1, -1}); // куда должен походить ферзь из этой позиции
 
     // начальные значения
@@ -72,132 +73,73 @@ int main(){
             {
                 for (int x2 = -1; x2 < 2; x2++)
                 {
-                    dpblack.set(2+x1, 2+x2, k, l) = 0;
+                    dpblack.set(2+x1, 2+x2, k, l) = -1;
                 } 
             }
             // бьется ферзем
-            
-            for (int t1(l), t2(k); 0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2); t1++) {
-                if (t1==l && t2==k)
+            for (int t1(k), t2(l); 0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2); t1++) {
+                if (t1==k && t2==l)
                     continue;
-                dpblack.set(t1, t2, k, l) = 0;
+                dpblack.set(t1, t2, k, l) = -1;
             }
-            for (int t1(l), t2(k); 0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2); t1--) {
-                if (t1==l && t2==k)
+            for (int t1(k), t2(l); 0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2); t1--) {
+                if (t1==k && t2==l)
                     continue;
-                dpblack.set(t1, t2, k, l) = 0;
-            }
-            
-            for (int t1(l), t2(k); 0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2); t2++) {
-                if (t1==l && t2==k)
-                    continue;
-                dpblack.set(t1, t2, k, l) = 0;
-            }
-            for (int t1(l), t2(k); 0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2); t2--) {
-                if (t1==l && t2==k)
-                    continue;
-                dpblack.set(t1, t2, k, l) = 0;
+                dpblack.set(t1, t2, k, l) = -1;
             }
             
-            for (int t1(l), t2(k); 0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2);t1++, t2++) {
-                if (t1==l && t2==k)
+            for (int t1(k), t2(l); 0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2); t2++) {
+                if (t1==k && t2==l)
                     continue;
-                dpblack.set(t1, t2, k, l) = 0;
+                dpblack.set(t1, t2, k, l) = -1;
             }
-            for (int t1(l), t2(k); 0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2);t1--, t2--) {
-                if (t1==l && t2==k)
+            for (int t1(k), t2(l); 0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2); t2--) {
+                if (t1==k && t2==l)
                     continue;
-                dpblack.set(t1, t2, k, l) = 0;
+                dpblack.set(t1, t2, k, l) = -1;
             }
-            
-            for (int t1(l), t2(k); 0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2);t1++, t2--) {
-                if (t1==l && t2==k)
+            for (int t1(k), t2(l); 0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2);t1++, t2++) {
+                if (t1==k && t2==l)
                     continue;
-                dpblack.set(t1, t2, k, l) = 0;
+                dpblack.set(t1, t2, k, l) = -1;
             }
-            for (int t1(l), t2(k); 0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2);t1--, t2++) {
-                if (t1==l && t2==k)
+            for (int t1(k), t2(l); 0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2);t1--, t2--) {
+                if (t1==k && t2==l)
                     continue;
-                dpblack.set(t1, t2, k, l) = 0;
+                dpblack.set(t1, t2, k, l) = -1;
             }
-            
-            
-
-            // int t1, t2;
-            // t1 = l;
-            // t2 = k;
-            // while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
-            //     if (t1==l && t2==k)
-            //         continue;
-            //     dpblack.set(t1, t2, k, l) = 0;
-            //     t1++;
-            // }
-            // t1 = l;
-            // t2 = k;
-            // while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
-            //     if (t1==l && t2==k)
-            //         continue;
-            //     dpblack.set(t1, t2, k, l) = 0;
-            //     t1--;
-            // }
-            // t1 = l;
-            // t2 = k;
-            // while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
-            //     if (t1==l && t2==k)
-            //         continue;
-            //     dpblack.set(t1, t2, k, l) = 0;
-            //     t2++;
-            // }
-            // t1 = l;
-            // t2 = k;
-            // while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
-            //     if (t1==l && t2==k)
-            //         continue;
-            //     dpblack.set(t1, t2, k, l) = 0;
-            //     t2--;
-            // }
-            // t1 = l;
-            // t2 = k;
-            // while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
-            //     if (t1==l && t2==k)
-            //         continue;
-            //     dpblack.set(t1, t2, k, l) = 0;
-            //     t1--;
-            //     t2--;
-            // }
-            // t1 = l;
-            // t2 = k;
-            // while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
-            //     if (t1==l && t2==k)
-            //         continue;
-            //     dpblack.set(t1, t2, k, l) = 0;
-            //     t1++;
-            //     t2++;
-            // }
-            // t1 = l;
-            // t2 = k;
-            // while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
-            //     if (t1==l && t2==k)
-            //         continue;
-            //     dpblack.set(t1, t2, k, l) = 0;
-            //     t1--;
-            //     t2++;
-            // }
-            // t1 = l;
-            // t2 = k;
-            // while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
-            //     if (t1==l && t2==k)
-            //         continue;
-            //     dpblack.set(t1, t2, k, l) = 0;
-            //     t1++;
-            //     t2--;
-            // }
+            for (int t1(k), t2(l); 0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2);t1++, t2--) {
+                if (t1==k && t2==l)
+                    continue;
+                dpblack.set(t1, t2, k, l) = -1;
+            }
+            for (int t1(k), t2(l); 0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2);t1--, t2++) {
+                if (t1==k && t2==l)
+                    continue;
+                dpblack.set(t1, t2, k, l) = -1;
+            }
         }
         
     }
-    int k = 5;
-    int l = 5;
+    cerr << dpblack.get(7, 5, 7, 5) << endl;
 
+    for (int i = 0; i < size; i++)
+    {
+        for (int j = 0; j < size; j++)
+        {
+            if (i == 2 && j == 2)
+            {
+                continue;
+            }
+            dpwhite.set(i, j, i, j) = -2;   // ферзь съел короля
+        }
+        
+    }
+    
+
+
+    // int k = 5;
+    // int l = 5;
     // for (int i = 0; i < size; i++)
     // {for (int j = 0; j < size; j++){
     //     // cout << dpblack.get(i, j, k, l) << " ";
@@ -216,20 +158,32 @@ int main(){
         {for (int j = 0; j < size; j++)
         {for (int k = 0; k < size; k++)
         {for (int l = 0; l < size; l++){
-            if (dpwhite.get(i,j,k,l) != inf)
-                continue;
-            if (i == k && j == l)
+            if (k == 2 && l == 2)
             {
+                if (dpwhite.get(i, j, k, l) != inf)
+                {
+                    cerr << "Error. Fers can eat his king" << endl;
+                }
                 continue;
             }
+            if (i == k && j == l)   // ферзь съел короля - тут -2 мат был 2 хода назад
+            {
+                if (dpwhite.get(i, j, k, l) != -2) {
+                    // cerr << "Error. fers has eaten king wrongly" << endl;
+                }
+                continue;
+            }
+            // if (dpwhite.get(i,j,k,l) != inf)
+            //     continue;
+
             
-            dpwhite.set(i,j,k,l) = -1;
+            dpwhite.set(i,j,k,l) = -10;
             for (int x1 = -1; x1 < 2; x1++)
             {
                 for (int x2 = -1; x2 < 2; x2++)
                 {
                     if (x1 != 0 || x2 != 0) 
-                        dpwhite.set(i,j,k,l) = max(dpblack.get(i+x1, j+x2, k, l), dpwhite.set(i,j,k,l)) ;
+                        dpwhite.set(i,j,k,l) = min(inf, max(dpblack.get(i+x1, j+x2, k, l)+1, dpwhite.get(i,j,k,l)));
                 }
                 
             }            
@@ -241,93 +195,98 @@ int main(){
         {for (int j = 0; j < size; j++)
         {for (int k = 0; k < size; k++)
         {for (int l = 0; l < size; l++){
+            if (i == 2 && j == 2)
+            {
+                if (dpblack.get(i, j, k, l) != -1)
+                {
+                    // cerr << "Error. Wrong value, when black king has eaten white one" << endl;
+                    // cerr << i << " " << j << " " << k << " " << l << " " << dpblack.get(i, j, k, l) << endl;
+                }
+                
+                continue;
+            }
+            
             // if (dpblack.get(i, j, k, l) != inf)
             // {
             //     continue;
             // }
-            if (i == k && k == l)
+            if (dpblack.get(i, j, k, l) == -1)  // тут король черный бьется
+            {
                 continue;
-            
-            int t1, t2;
-            t1 = l;
-            t2 = k;
-            while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
-                if (1 + dpwhite.get(i, j, t1, t2) < dpblack.get(i, j, k, l)) {
-                    dpblack.set(i, j, k, l) = 1 + dpwhite.get(i, j, t1, t2);    
-                    steps.set(i, j, k, l) = {t1, t2};
-                }
-                t1++;
-            }
-            t1 = l;
-            t2 = k;
-            while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
-                if (1 + dpwhite.get(i, j, t1, t2) < dpblack.get(i, j, k, l)) {
-                    dpblack.set(i, j, k, l) = 1 + dpwhite.get(i, j, t1, t2);    
-                    steps.set(i, j, k, l) = {t1, t2};
-                }
-                t2++;
-            }
-            t1 = l;
-            t2 = k;
-            while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
-                if (1 + dpwhite.get(i, j, t1, t2) < dpblack.get(i, j, k, l)) {
-                    dpblack.set(i, j, k, l) = 1 + dpwhite.get(i, j, t1, t2);    
-                    steps.set(i, j, k, l) = {t1, t2};
-                }                t1--;
-            }
-            t1 = l;
-            t2 = k;
-            while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
-                if (1 + dpwhite.get(i, j, t1, t2) < dpblack.get(i, j, k, l)) {
-                    dpblack.set(i, j, k, l) = 1 + dpwhite.get(i, j, t1, t2);    
-                    steps.set(i, j, k, l) = {t1, t2};
-                }
-                t2--;
-            }
-
-            t1 = l;
-            t2 = k;
-            while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
-                if (1 + dpwhite.get(i, j, t1, t2) < dpblack.get(i, j, k, l)) {
-                    dpblack.set(i, j, k, l) = 1 + dpwhite.get(i, j, t1, t2);    
-                    steps.set(i, j, k, l) = {t1, t2};
-                }
-                t1--;
-                t2--;
-            }
-            t1 = l;
-            t2 = k;
-            while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
-                if (1 + dpwhite.get(i, j, t1, t2) < dpblack.get(i, j, k, l)) {
-                    dpblack.set(i, j, k, l) = 1 + dpwhite.get(i, j, t1, t2);    
-                    steps.set(i, j, k, l) = {t1, t2};
-                }
-                t1++;
-                t2++;
-            }
-
-            t1 = l;
-            t2 = k;
-            while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
-                if (1 + dpwhite.get(i, j, t1, t2) < dpblack.get(i, j, k, l)) {
-                    dpblack.set(i, j, k, l) = 1 + dpwhite.get(i, j, t1, t2);    
-                    steps.set(i, j, k, l) = {t1, t2};
-                }
-                t1--;
-                t2++;
-            }
-            t1 = l;
-            t2 = k;
-            while (0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2)) {
-                if (1 + dpwhite.get(i, j, t1, t2) < dpblack.get(i, j, k, l)) {
-                    dpblack.set(i, j, k, l) = 1 + dpwhite.get(i, j, t1, t2);    
-                    steps.set(i, j, k, l) = {t1, t2};
-                }
-                t1++;
-                t2--;
             }
             
+            if (i == k && j == l) {
+                if (dpblack.set(i, j, k, l) != inf) {
+                    // cerr << "Error. King has eaten fers and didn't win" << endl;
+                    // cerr << i << " " << j << " " << k << " " << l << " " << dpblack.get(i, j, k, l) << endl;                    
+                }
+                continue;
+            }
 
+            for (int t1(k), t2(l); 0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2); t1++) {
+                if (t1==k && t2==l)
+                    continue;
+                if (1 + dpwhite.get(i, j, t1, t2) < dpblack.get(i, j, k, l)) {
+                    dpblack.set(i, j, k, l) = 1 + dpwhite.get(i, j, t1, t2);    
+                    steps.set(i, j, k, l) = {t1, t2};
+                }            
+            }
+            for (int t1(k), t2(l); 0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2); t1--) {
+                if (t1==k && t2==l)
+                    continue;
+                if (1 + dpwhite.get(i, j, t1, t2) < dpblack.get(i, j, k, l)) {
+                    dpblack.set(i, j, k, l) = 1 + dpwhite.get(i, j, t1, t2);    
+                    steps.set(i, j, k, l) = {t1, t2};
+                }
+            }
+            for (int t1(k), t2(l); 0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2); t2++) {
+                if (t1==k && t2==l)
+                    continue;
+                if (1 + dpwhite.get(i, j, t1, t2) < dpblack.get(i, j, k, l)) {
+                    dpblack.set(i, j, k, l) = 1 + dpwhite.get(i, j, t1, t2);    
+                    steps.set(i, j, k, l) = {t1, t2};
+                }
+            }
+            for (int t1(k), t2(l); 0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2); t2--) {
+                if (t1==k && t2==l)
+                    continue;
+                if (1 + dpwhite.get(i, j, t1, t2) < dpblack.get(i, j, k, l)) {
+                    dpblack.set(i, j, k, l) = 1 + dpwhite.get(i, j, t1, t2);    
+                    steps.set(i, j, k, l) = {t1, t2};
+                }
+            }
+            for (int t1(k), t2(l); 0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2);t1++, t2++) {
+                if (t1==k && t2==l)
+                    continue;
+                if (1 + dpwhite.get(i, j, t1, t2) < dpblack.get(i, j, k, l)) {
+                    dpblack.set(i, j, k, l) = 1 + dpwhite.get(i, j, t1, t2);    
+                    steps.set(i, j, k, l) = {t1, t2};
+                }
+            }
+            for (int t1(k), t2(l); 0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2);t1--, t2--) {
+                if (t1==k && t2==l)
+                    continue;
+                if (1 + dpwhite.get(i, j, t1, t2) < dpblack.get(i, j, k, l)) {
+                    dpblack.set(i, j, k, l) = 1 + dpwhite.get(i, j, t1, t2);    
+                    steps.set(i, j, k, l) = {t1, t2};
+                }
+            }
+            for (int t1(k), t2(l); 0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2);t1++, t2--) {
+                if (t1==k && t2==l)
+                    continue;
+                if (1 + dpwhite.get(i, j, t1, t2) < dpblack.get(i, j, k, l)) {
+                    dpblack.set(i, j, k, l) = 1 + dpwhite.get(i, j, t1, t2);    
+                    steps.set(i, j, k, l) = {t1, t2};
+                }
+            }
+            for (int t1(k), t2(l); 0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2);t1--, t2++) {
+                if (t1==k && t2==l)
+                    continue;
+                if (1 + dpwhite.get(i, j, t1, t2) < dpblack.get(i, j, k, l)) {
+                    dpblack.set(i, j, k, l) = 1 + dpwhite.get(i, j, t1, t2);    
+                    steps.set(i, j, k, l) = {t1, t2};
+                }
+            }
         }}}}
 
         
