@@ -221,7 +221,6 @@ int main(){
                 }
                 continue;
             }
-
             for (int t1(k), t2(l); 0 <= t1 && 0 <= t2 && t1 < size && t2 < size && !(t1 == 2 && t2 == 2); t1++) {
                 if (t1==k && t2==l)
                     continue;
@@ -353,9 +352,9 @@ int main(){
     int x1, y1, x2, y2;
     cin >> x1 >> y1 >> x2 >> y2;
     cout << endl;
-    cout << dpwhite.get(x1-1, y1-1, x2-1, y2-1) << endl;
-    
-    // while (cin >> x1 >> y1 >> x2 >> y2) {
-    //     cout << steps.get(x1, y1, x2, y2).first << " " << steps.get(x1, y1, x2, y2).second;
-    // }
+    cout << dpblack.get(x1-1, y1-1, x2-1, y2-1) << endl;
+    cout << "Enter king and fers position (0-7 0-7) to find out the best fers step\n";
+    while (cin >> x1 >> y1 >> x2 >> y2) {
+        cout << steps.get(x1, y1, x2, y2).first << " " << steps.get(x1, y1, x2, y2).second << endl;
+    }
 }
