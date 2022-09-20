@@ -1,3 +1,0 @@
-all: main
-main : map_launcher.cpp
-	g++ map_launcher.cpp simulater.h simulater.cpp -o space_fraction/spaceLauncher

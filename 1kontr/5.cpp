@@ -1,35 +1,5 @@
 #include <stdint.h>
 
-bool get(int i) {
-    return get_results(i%360);
-}
-
-bool increase(int i) {
-    return get(i+1) > get(i);
-}
-bool maximum_is_between(int left, int right) {
-    // это индексы по модулю, но в правльном порядке
-    if (increase(left) && !increase(right)) 
-    {
-        // максимум точно между
-        return true;
-    }
-    if (increase(left) && increase(right) && (get(right) < get(left)))
-    {
-        /* code */
-    }
-    еlse 
-    return false
-    
-}
-
-void detect() {
-    // идея в том, чтобы искать бинарным поиском. Если в двух точках функция возрастает и у более правого угла значение больше, что и между 
-    // функция возрастает, иначе было бы два промежутка убывания: внутри и снаружи
-    // тут бинарный поиск
-}
-
-
 uint32_t get_results(uint32_t channel)
 {
     static uint32_t calls = 0;
@@ -48,7 +18,62 @@ uint32_t get_results(uint32_t channel)
         return static_cast<uint32_t>(max - ((double)channel - max_channel)*((double)max - zero)/((double)360 - max_channel));
     return static_cast<uint32_t>(-1);
 }
+
+#include <iostream>
+using namespace std;
+
+int get(int i) {
+    return get_results(i%360);
+}
+
+void detect() {
+    // идея в том, чтобы искать бинарным поиском. Если в двух точках функция возрастает и у более правого угла значение больше, что и между 
+    // функция возрастает, иначе было бы два промежутка убывания: внутри и снаружи
+    // тут бинарный поиск
+    int left = 0;
+    int right = 359;
+    int left_val = get(left);
+    while (right-left > 1)
+    {
+        int mid = (right + left)/2;
+        int a = get(mid);
+        int b = get(mid+1);
+        if ((a < b) && left_val < a) {
+            left = mid+1;
+            int left_val = b;
+        }
+        else {
+            right = mid+1;
+        }
+        // if (maximum_is_between(left, mid)) {
+        //     right = mid;
+        // }
+        // else {
+        //     left = mid;
+        // }
+    }
+    if (get(right) > get(left)) {
+        cout << get(right);
+        cout << " ";
+        cout << right;
+    }
+    else {
+        cout << get(left);
+        cout << " ";
+        cout << left;
+    }
+    
+}
+
 int main() {
+    // cout << get(246) << endl;
+    // cout << get(247) << endl;
+    // cout << get(257) << endl;
+    // cout << get(258) << endl;
+    // cout << increase(257) << endl;
+    // cout << increase(246) << endl;
+    // cout << get(4) << endl;
+    // cout << get(250) << endl;
     detect();
     return 0;
 }
