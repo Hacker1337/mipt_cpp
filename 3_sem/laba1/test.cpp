@@ -30,15 +30,22 @@ int main()
     b.print();
     cout << endl;
     cout << "Finished test " << ++i << endl;
-    // Rectangle c = b + a;
-    // cout << "Finished test " << ++i << endl;
-    // c.print();
-    // cout << endl;
-    // cout << "Finished test " << ++i << endl;
-    // Rectangle d = c*b;
-    // d.print(); 
-    // cout << endl;
-    // cout << "Finished test " << ++i << endl;
+
+
+    Rectangle e(5, 4);
+    e.print(); cout << endl;
+    cout << "Finished test " << ++i << endl;
+
+    Rectangle c = b + a;
+    a.print(); cout << " + "; b.print(); cout << " = ";c.print();
+    cout << endl;
+    cout << "Finished test " << ++i << endl;
+
+
+    Rectangle d = c*e;
+    c.print(); cout << " * "; e.print(); cout << " = ";d.print();
+    cout << endl;
+    cout << "Finished test " << ++i << endl;
     
 
     cout << "All tests successfully finished!\n";

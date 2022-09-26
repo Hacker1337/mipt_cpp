@@ -27,22 +27,29 @@ struct Point
     }
 };
 
-class Rectangle
+class Rectangle : Point
 {
-    Point corner;
+    // Point corner;
 
 public:
-    Rectangle() : corner(0, 0){}
+    Rectangle() : Point(0, 0) {}
 
-    Rectangle(Point const & rha) : corner(rha) {}
-    // todo
-    Rectangle operator+(Rectangle const &rha) const;
-    // todo
-    Rectangle operator*(Rectangle const &rha) const;
-    // todo
+    Rectangle(Point const &rha) : Point(rha) {}
+    Rectangle(unsigned long long x, unsigned long long y) : Point(x, y) {}
 
-    void print() const
+    Rectangle operator+(Rectangle const &rha) const
     {
-        corner.print();
+        return Rectangle(this->maxx(rha).maxy(rha));
     };
+    Rectangle operator*(Rectangle const &rha) const {
+        return Rectangle(this->minx(rha).miny(rha));
+    }
+    // todo
+
+    using Point::print;
+
+    // void print() const
+    // {
+    //     corner.print();
+    // };
 };
