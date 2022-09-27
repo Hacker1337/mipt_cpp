@@ -44,8 +44,6 @@ public:
     Rectangle operator*(Rectangle const &rha) const {
         return Rectangle(this->minx(rha).miny(rha));
     }
-    // todo
-
     using Point::print;
 
     // void print() const
