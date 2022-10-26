@@ -27,15 +27,27 @@ class Grid {  // if dim != 2, create massive of dim-1 dimensional Grids
         return data[z_idx];
     }
 
-    template <typename... Args>
-    Grid(size_type z_size,
-         Args... args)  // multidimensional constructor by dimensions.
-        : z_size(z_size) {
-        data = new Grid<T, dim - 1>[z_size];
-        for (int i = 0; i < z_size; i++) {
-            data[i] = Grid<T, dim - 1>(args...);
-        }
-    }
+     template <typename... Args>
+     Grid(size_type z_size,
+          Args... args)  // multidimensional constructor by dimensions.
+         : z_size(z_size) {
+         data = new Grid<T, dim - 1>[z_size];
+         for (int i = 0; i < z_size; i++) {
+             data[i] = Grid<T, dim - 1>(args...);
+         }
+     }
+
+
+//    template <typename... Args>
+//    Grid(size_type z_size,
+//         Args... args)  // multidimensional constructor by dimensions.
+//        : z_size(z_size) {
+//        data = reinterpret_cast<Grid<T, dim - 1> * > (new char[(z_size*sizeof(Grid<T, dim-1>))] );
+//        for (int i = 0; i < z_size; i++) {
+//            // data[i] = Grid<T, dim - 1>(args...);
+//            new(&data[i]) Grid<T, dim - 1>(args...);
+//        }
+//    }
 
     ~Grid() { delete[] data; }
     Grid(Grid<T, dim> const& grid) : z_size(grid.z_size) {
